@@ -135,7 +135,7 @@ button:active {
 }
 
 .toast {
-    postition: fixed;
+    postition: absolute;
     font-size: 9px;
 }
 
