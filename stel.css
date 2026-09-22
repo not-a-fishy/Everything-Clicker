@@ -135,8 +135,9 @@ button:active {
 }
 
 .toast {
-    postition: absolute;
+    position: absolute;
     font-size: 9px;
+    pointer-events: none;
 }
 
 @media (max-width: 600px) {
