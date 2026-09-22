@@ -65,10 +65,10 @@ function updateUpgrades() {
 }
 
 moneyImg.addEventListener("click", (e) => {
+    update(moneyPerClick);
     const x = e.clientX;
     const y = e.clientY;
-    update(moneyPerClick);
-    p = document.createElement("p");
+    const p = document.createElement("p");
     p.style.left = `${x}px`;
     p.style.top = `${y}px`;
     p.classList.add("toast");
