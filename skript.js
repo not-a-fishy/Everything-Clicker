@@ -5,10 +5,10 @@ const upgradesContainer = document.getElementById("upgrades-container");
 const moneyImg = document.getElementById("money-img");
 
 const upgrades = [
-    // name, description, cost, per click, per second
-    ["Better Money", "+$1 per click", 10, 1, 0],
-    ["Money Printer", "+$5 per second", 50, 0, 1],
-    ["Golden Clicker", "+$50 per click", 200, 50, 0]
+    // format: [name, description, cost, per click, per second,buy limit,total_bought unlocked]
+    ["Better Money", "+$1 per click", 10, 1, 0,50,0, false],
+    ["Money Printer", "+$5 per second", 50, 0, 5,100,0, false],
+    ["Golden Clicker", "+$50 per click", 200, 50, 0,25,0, false]
 ];
 
 let gameId = localStorage.getItem("gameId");
@@ -69,10 +69,13 @@ function updateUpgrades() {
     upgradesContainer.innerHTML = "";
 
     upgrades.forEach((upgrade, index) => {
-        const [name, description, cost] = upgrade;
+        const [name, description, cost, click, second,buy_limit,count, unlocked] = upgrade;
 
-        if (game.bought[index]) return;
-        if (game.money < cost) return;
+        if (!unlocked && money >= cost) {
+            upgrade[7] = true;
+        }
+
+        if (!upgrade[7]) return;
 
         const div = document.createElement("div");
         div.className = "upgrade";
@@ -86,9 +89,15 @@ function updateUpgrades() {
             <button>Buy</button>
         `;
 
-        div.querySelector("button").onclick = () => {
-            request("buy", index);
-        };
+        div.querySelector("button").addEventListener("click", () => {
+            if (money < cost) return;
+            if (count >= buy_limit){ alert("buy limit reached");return;}
+            money -= cost;
+            moneyPerClick += click;
+            moneyPerSecond += second;
+            upgrade[6] += 1;
+            update();
+        });
 
         upgradesContainer.appendChild(div);
     });
