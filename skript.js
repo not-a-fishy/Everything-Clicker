@@ -5,10 +5,9 @@ const upgradesContainer = document.getElementById("upgrades-container");
 const moneyImg = document.getElementById("money-img");
 
 const upgrades = [
-    // format: [name, description, cost, per click, per second,buy limit,total_bought unlocked]
-    ["Better Money", "+$1 per click", 10, 1, 0,50,0, false],
-    ["Money Printer", "+$5 per second", 50, 0, 5,100,0, false],
-    ["Golden Clicker", "+$50 per click", 200, 50, 0,25,0, false]
+    ["Better Money", "+$1 per click", 10, 50],
+    ["Money Printer", "+$5 per second", 50, 100],
+    ["Golden Clicker", "+$50 per click", 200, 25]
 ];
 
 let gameId = localStorage.getItem("gameId");
@@ -51,6 +50,11 @@ async function loadGame() {
         }
     });
 
+    if (!response.ok) {
+        console.error("Failed to load game");
+        return;
+    }
+
     game = await response.json();
     updateUI();
 }
@@ -85,6 +89,7 @@ function updateUpgrades() {
                 <strong>${name}</strong>
                 <span>${description}</span>
                 <small>Cost: $${cost}</small>
+                <small>Bought: ${count}/${buyLimit}</small>
             </div>
             <button>Buy</button>
         `;
@@ -114,13 +119,13 @@ moneyImg.addEventListener("click", e => {
     p.style.top = `${e.pageY}px`;
 
     p.classList.add("toast");
-    p.textContent = `+${game.moneyPerClick}`;
+    p.textContent = `+$${game?.moneyPerClick || 1}`;
 
     document.body.appendChild(p);
 
     setTimeout(() => p.remove(), 800);
 });
 
-setInterval(loadGame, 1000);
-
 loadGame();
+
+setInterval(loadGame, 1000);
