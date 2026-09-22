@@ -21,6 +21,7 @@ function update() {
 
 moneyImg.addEventListener(('click', 'tap') => {
     money += moneyPerClick;
+    alert(money)
 });
 
 
