@@ -1,8 +1,46 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clicker</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<link rel = "stylesheet" href = "stel.css">
 </head>
 <body>
-  <button id="pointBtn">₱</button>
+  <main class="game">
+    <div class="score" id="score">$0</div>
+    <button class="clicker" id="clicker" aria-label="Click to earn money">$</button>
+  </main>
+
+<script>
+  let score = 0;
+  let perClick = 1; // change this for upgrades
+
+  const scoreEl = document.getElementById('score');
+  const btn = document.getElementById('clicker');
+
+  btn.addEventListener('click', (e) => {
+    score += perClick;
+    scoreEl.textContent = "$" + score;
+    scoreEl.classList.remove('bump');
+    void scoreEl.offsetWidth; // restart bump animation
+    scoreEl.classList.add('bump');
+
+    // Keyboard clicks have no mouse position, so use the button center
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX || r.left + r.width / 2;
+    const y = e.clientY || r.top + r.height / 2;
+
+    const plus = document.createElement('span');
+    plus.className = 'plus';
+    plus.textContent = "+$" + perClick;
+    plus.style.left = x + 'px';
+    plus.style.top = y + 'px';
+    plus.style.setProperty('--drift', (Math.random() * 60 - 30) + 'px');
+    document.body.appendChild(plus);
+    plus.addEventListener('animationend', () => plus.remove());
+  });
+</script>
 </body>
 </html>
