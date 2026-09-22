@@ -134,6 +134,11 @@ button:active {
     cursor: not-allowed;
 }
 
+.toast {
+    postition: fixed;
+    font-size: 9px;
+}
+
 @media (max-width: 600px) {
     body {
         padding-top: 25px;
