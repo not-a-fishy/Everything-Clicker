@@ -70,10 +70,11 @@ moneyImg.addEventListener("click", (e) => {
     update(moneyPerClick);
     p = document.createElement("p");
     p.style = `
-        postition: fixed;
         left: ${x};
         top: ${y};
     `;
+    p.classList.add("toast");
+    p.textContent = `+${moneyPerClick}`;
     window.body.appendChild(p);
 });
 
