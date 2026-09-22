@@ -84,6 +84,56 @@ button:active {
     transform: translateY(0);
 }
 
+#upgrades-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 350px;
+}
+
+.upgrade {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+}
+
+.upgrade-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.upgrade-info strong {
+    font-size: 18px;
+}
+
+.upgrade-info span {
+    color: #666;
+}
+
+.upgrade-info small {
+    color: #999;
+}
+
+.upgrade button {
+    padding: 9px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.upgrade button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
 @media (max-width: 600px) {
     body {
         padding-top: 25px;
