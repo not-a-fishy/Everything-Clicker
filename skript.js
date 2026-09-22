@@ -38,6 +38,7 @@ function updateUpgrades() {
         if (!upgrade[5]) return;
 
         const div = document.createElement("div");
+        alert(div);
         div.className = "upgrade";
 
         div.innerHTML = `
