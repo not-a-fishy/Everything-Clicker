@@ -4,7 +4,7 @@ const moneyPerSecondUI = document.getElementById("money-per-second-ui");
 const upgradesContainer = document.getElementById("upgrades-container");
 const moneyImg = document.getElementById("money-img");
 
-let money = 0;
+let money = 0; 
 let moneyPerClick = 1;
 let moneyPerSecond = 0;
 
