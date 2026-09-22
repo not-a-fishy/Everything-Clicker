@@ -75,7 +75,7 @@ moneyImg.addEventListener("click", (e) => {
     `;
     p.classList.add("toast");
     p.textContent = `+${moneyPerClick}`;
-    window.body.appendChild(p);
+    document.body.appendChild(p);
 });
 
 setInterval(() => {
