@@ -1,54 +1,75 @@
-const games = new Map();
+const { kv } = require("@vercel/kv");
 
 const upgrades = [
-    ["Better Money", 10, 1, 0],
-    ["Money Printer", 50, 0, 1],
-    ["Golden Clicker", 200, 50, 0]
+    {
+        name: "Better Money",
+        description: "+$1 per click",
+        cost: 10,
+        perClick: 1,
+        perSecond: 0,
+        buyLimit: 50
+    },
+    {
+        name: "Money Printer",
+        description: "+$5 per second",
+        cost: 50,
+        perClick: 0,
+        perSecond: 5,
+        buyLimit: 100
+    },
+    {
+        name: "Golden Clicker",
+        description: "+$50 per click",
+        cost: 200,
+        perClick: 50,
+        perSecond: 0,
+        buyLimit: 25
+    }
 ];
 
-function getGame(id) {
-    if (!games.has(id)) {
-        games.set(id, {
-            money: 0,
-            moneyPerClick: 1,
-            moneyPerSecond: 0,
-            bought: [false, false, false],
-            lastTick: Date.now()
-        });
-    }
-
-    return games.get(id);
+function newGame() {
+    return {
+        money: 0,
+        moneyPerClick: 1,
+        moneyPerSecond: 0,
+        bought: [0, 0, 0],
+        lastUpdate: Date.now()
+    };
 }
 
-export default function handler(req, res) {
-    const id = req.headers["x-game-id"];
+export default async function handler(req, res) {
+    const gameId = req.headers["x-game-id"];
 
-    if (!id) {
-        return res.status(400).json({ error: "Missing game ID" });
+    if (!gameId || typeof gameId !== "string" || gameId.length > 100) {
+        return res.status(400).json({ error: "Invalid game ID" });
     }
 
-    const game = getGame(id);
+    const key = `game:${gameId}`;
+
+    let game = await kv.get(key);
+
+    if (!game) {
+        game = newGame();
+    }
 
     const now = Date.now();
-    const elapsed = (now - game.lastTick) / 1000;
+    const elapsed = Math.min((now - game.lastUpdate) / 1000, 10);
 
-    game.money += elapsed * game.moneyPerSecond;
-    game.lastTick = now;
+    if (elapsed > 0) {
+        game.money += game.moneyPerSecond * elapsed;
+        game.lastUpdate = now;
+    }
 
     if (req.method === "GET") {
-        return res.json({
-            money: game.money,
-            moneyPerClick: game.moneyPerClick,
-            moneyPerSecond: game.moneyPerSecond,
-            bought: game.bought
-        });
+        await kv.set(key, game);
+        return res.json(publicGame(game));
     }
 
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const { action, upgrade } = req.body || {};
+    const { action, upgradeIndex } = req.body || {};
 
     if (action === "click") {
         game.money += game.moneyPerClick;
@@ -56,37 +77,45 @@ export default function handler(req, res) {
 
     else if (action === "buy") {
         if (
-            !Number.isInteger(upgrade) ||
-            upgrade < 0 ||
-            upgrade >= upgrades.length
+            !Number.isInteger(upgradeIndex) ||
+            upgradeIndex < 0 ||
+            upgradeIndex >= upgrades.length
         ) {
             return res.status(400).json({ error: "Invalid upgrade" });
         }
 
-        if (game.bought[upgrade]) {
-            return res.status(400).json({ error: "Already bought" });
+        const upgrade = upgrades[upgradeIndex];
+
+        if (game.bought[upgradeIndex] >= upgrade.buyLimit) {
+            return res.status(400).json({ error: "Buy limit reached" });
         }
 
-        const [, cost, click, second] = upgrades[upgrade];
-
-        if (game.money < cost) {
+        if (game.money < upgrade.cost) {
             return res.status(400).json({ error: "Not enough money" });
         }
 
-        game.money -= cost;
-        game.moneyPerClick += click;
-        game.moneyPerSecond += second;
-        game.bought[upgrade] = true;
+        game.money -= upgrade.cost;
+        game.moneyPerClick += upgrade.perClick;
+        game.moneyPerSecond += upgrade.perSecond;
+        game.bought[upgradeIndex]++;
     }
 
     else {
         return res.status(400).json({ error: "Invalid action" });
     }
 
-    return res.json({
+    game.lastUpdate = Date.now();
+
+    await kv.set(key, game);
+
+    return res.json(publicGame(game));
+}
+
+function publicGame(game) {
+    return {
         money: game.money,
         moneyPerClick: game.moneyPerClick,
         moneyPerSecond: game.moneyPerSecond,
         bought: game.bought
-    });
+    };
 }
