@@ -85,8 +85,8 @@ setInterval(() => {
 
 setInterval(() => {
     if (Math.random() < 0.2) {
-        money = 0;
         alert("sorry");
+        money = 0;
     } else {
         alert("lucky");
     }
