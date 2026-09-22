@@ -5,6 +5,7 @@ const upgradesContainer = document.getElementById("upgrades-container");
 const moneyImg = document.getElementById("money-img");
 
 const upgrades = [
+    // name, description, cost, per click, per second
     ["Better Money", "+$1 per click", 10, 1, 0],
     ["Money Printer", "+$5 per second", 50, 0, 1],
     ["Golden Clicker", "+$50 per click", 200, 50, 0]
