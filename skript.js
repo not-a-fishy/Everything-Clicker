@@ -10,8 +10,6 @@ const upgrades = [
     ["Golden Clicker", "+$50 per click", 200, 25]
 ];
 
-let game = null;
-
 let gameId = localStorage.getItem("gameId");
 
 if (!gameId) {
@@ -19,32 +17,34 @@ if (!gameId) {
     localStorage.setItem("gameId", gameId);
 }
 
-async function request(action, upgradeIndex = null) {
-    const response = await fetch("/api/server", {
+let game = {
+    money: 0,
+    moneyPerClick: 1,
+    moneyPerSecond: 0,
+    bought: []
+};
+
+async function request(action, upgrade = null) {
+    const response = await fetch("/api/game", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-Game-ID": gameId
         },
-        body: JSON.stringify({
-            action,
-            upgradeIndex
-        })
+        body: JSON.stringify({ action, upgrade })
     });
 
-    const data = await response.json();
-
     if (!response.ok) {
-        console.error(data.error);
+        console.error(await response.json());
         return;
     }
 
-    game = data;
+    game = await response.json();
     updateUI();
 }
 
 async function loadGame() {
-    const response = await fetch("/api/server", {
+    const response = await fetch("/api/game", {
         headers: {
             "X-Game-ID": gameId
         }
@@ -61,10 +61,8 @@ async function loadGame() {
 
 function updateUI() {
     moneyUI.textContent = `$${Math.floor(game.money)}`;
-
     moneyPerClickUI.textContent =
         `$${game.moneyPerClick} per click`;
-
     moneyPerSecondUI.textContent =
         `$${game.moneyPerSecond} per second`;
 
@@ -75,8 +73,13 @@ function updateUpgrades() {
     upgradesContainer.innerHTML = "";
 
     upgrades.forEach((upgrade, index) => {
-        const [name, description, cost, buyLimit] = upgrade;
-        const count = game.bought[index] || 0;
+        const [name, description, cost, click, second,buy_limit,count, unlocked] = upgrade;
+
+        if (!unlocked && game.money >= cost) {
+            upgrade[7] = true;
+        }
+
+        if (!upgrade[7]) return;
 
         const div = document.createElement("div");
         div.className = "upgrade";
@@ -88,13 +91,19 @@ function updateUpgrades() {
                 <small>Cost: $${cost}</small>
                 <small>Bought: ${count}/${buyLimit}</small>
             </div>
-            <button ${count >= buyLimit ? "disabled" : ""}>
-                Buy
-            </button>
+            <button>Buy</button>
         `;
 
         div.querySelector("button").addEventListener("click", () => {
-            request("buy", index);
+            if (game.money < cost) return;
+            if (upgrade[6] >= buy_limit) { alert("buy limit reached"); return; }
+
+            game.money -= cost;
+            game.moneyPerClick += click;
+            game.moneyPerSecond += second;
+            upgrade[6] += 1;
+
+            updateUI();
         });
 
         upgradesContainer.appendChild(div);
