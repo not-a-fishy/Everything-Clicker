@@ -19,15 +19,10 @@ function update() {
     updateUI();
 }
 
-moneyImg.addEventListener(('click', 'tap') => {
+moneyImg.addEventListener(('click') => {
     money += moneyPerClick;
-    alert(money)
 });
 
-
-
 setInterval(() => {
-
     update();
-
 }, 1000);
