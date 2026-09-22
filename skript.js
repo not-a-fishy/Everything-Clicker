@@ -4,11 +4,11 @@ const moneyPerSecondUI = document.getElementById("money-per-second-ui");
 const upgradesContainer = document.getElementById("upgrades-container");
 const moneyImg = document.getElementById("money-img");
 
-let upgrades = [
-    // format: [name, description, cost, per click, per second, multiplier, unlocked]
-    ["Better Money", "+$1 per click", 10, 1, 0, 1.5, false],
-    ["Money Printer", "+$5 per second", 50, 0, 1, 1.5, false], 
-    ["Golden Clicker", "+$50 per click", 500, 50, 0, 2, false]
+const upgrades = [
+    // format: [name, description, cost, per click, per second,buy limit,total_bought unlocked]
+    ["Better Money", "+$1 per click", 10, 1, 0,50,0, false],
+    ["Money Printer", "+$5 per second", 50, 0, 5,100,0, false],
+    ["Golden Clicker", "+$50 per click", 200, 50, 0,25,0, false]
 ];
 
 let toasts = [];
@@ -30,13 +30,13 @@ function updateUpgrades() {
     upgradesContainer.innerHTML = "";
 
     upgrades.forEach((upgrade, index) => {
-        const [name, description, cost, click, second, multiplier, unlocked] = upgrade;
+        const [name, description, cost, click, second,buy_limit,count, unlocked] = upgrade;
 
         if (!unlocked && money >= cost) {
-            upgrade[5] = true;
+            upgrade[7] = true;
         }
 
-        if (!upgrade[5]) return;
+        if (!upgrade[7]) return;
 
         const div = document.createElement("div");
         div.className = "upgrade";
@@ -52,12 +52,11 @@ function updateUpgrades() {
 
         div.querySelector("button").addEventListener("click", () => {
             if (money < cost) return;
-
+            if (count >= buy_limit){ alert("buy limit reached");return;}
             money -= cost;
             moneyPerClick += click;
             moneyPerSecond += second;
-            cost *= multiplier
-            
+            upgrade[6] += 1;
             update();
         });
 
@@ -84,13 +83,5 @@ setInterval(() => {
     update(moneyPerSecond);
 }, 1000);
 
-setInterval(() => {
-    if (Math.random() < 0.2) {
-        money = 0;
-        alert("sorry");
-    } else {
-        alert("lucky");
-    }
-}, 10000);
-
 update();
+
