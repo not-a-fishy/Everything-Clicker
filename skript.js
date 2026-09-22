@@ -7,7 +7,7 @@ const moneyImg = document.getElementById("money-img");
 const upgrades = [
     // format: [name, description, cost, per click, per second, unlocked]
     ["Better Money", "+$1 per click", 10, 1, 0, false],
-    ["Money Printer", "+$5 per second", 50, 0, 1, false],
+    ["Money Printer", "+$5 per second", 50, 0, 1, false], 
     ["Golden Clicker", "+$50 per click", 200, 50, 0, false]
 ];
 
