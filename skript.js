@@ -20,7 +20,7 @@ if (!gameId) {
 }
 
 async function request(action, upgradeIndex = null) {
-    const response = await fetch("/api/game", {
+    const response = await fetch("/api/server", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
