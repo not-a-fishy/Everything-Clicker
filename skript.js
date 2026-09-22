@@ -6,11 +6,12 @@ const moneyImg = document.getElementById("money-img");
 
 const upgrades = [
     // format: [name, description, cost, per click, per second, unlocked]
-    ["Better Money", "+1 money per click", 10, 1, 0, false],
-    ["Money Printer", "+1 money per second", 50, 0, 1, false],
-    ["Golden Clicker", "+5 money per click", 200, 5, 0, false]
+    ["Better Money", "+$1 per click", 10, 1, 0, false],
+    ["Money Printer", "+$5 per second", 50, 0, 1, false],
+    ["Golden Clicker", "+$50 per click", 200, 5, 0, false]
 ];
 
+let toasts = [];
 let money = 0;
 let moneyPerClick = 1;
 let moneyPerSecond = 0;
@@ -63,8 +64,17 @@ function updateUpgrades() {
     });
 }
 
-moneyImg.addEventListener("click", () => {
+moneyImg.addEventListener("click", (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
     update(moneyPerClick);
+    p = document.createElement("p");
+    p.style = `
+        postition: fixed;
+        left: ${x};
+        top: ${y};
+    `;
+    window.body.appendChild(p);
 });
 
 setInterval(() => {
