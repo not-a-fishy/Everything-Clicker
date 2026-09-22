@@ -69,10 +69,8 @@ moneyImg.addEventListener("click", (e) => {
     const y = e.clientY;
     update(moneyPerClick);
     p = document.createElement("p");
-    p.style = `
-        left: ${x};
-        top: ${y};
-    `;
+    p.style.left = `${x}px`;
+    p.style.top = `${y}px`;
     p.classList.add("toast");
     p.textContent = `+${moneyPerClick}`;
     document.body.appendChild(p);
