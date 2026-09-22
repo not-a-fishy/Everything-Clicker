@@ -66,8 +66,8 @@ function updateUpgrades() {
 
 moneyImg.addEventListener("click", (e) => {
     update(moneyPerClick);
-    const x = e.clientX;
-    const y = e.clientY;
+    const x = e.pageX;
+    const y = e.pageY;
     const p = document.createElement("p");
     p.style.left = `${x}px`;
     p.style.top = `${y}px`;
