@@ -56,8 +56,6 @@ function updateUpgrades() {
             moneyPerClick += click;
             moneyPerSecond += second;
 
-            upgrade[5] = false;
-
             update();
         });
 
