@@ -44,7 +44,7 @@ async function request(action, upgradeIndex = null) {
 }
 
 async function loadGame() {
-    const response = await fetch("/api/game", {
+    const response = await fetch("/api/server", {
         headers: {
             "X-Game-ID": gameId
         }
