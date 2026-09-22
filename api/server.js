@@ -1,4 +1,6 @@
-const { kv } = require("@vercel/kv");
+const { neon } = require("@neondatabase/serverless");
+
+const sql = neon(process.env.DATABASE_URL);
 
 const upgrades = [
     {
@@ -37,6 +39,33 @@ function newGame() {
     };
 }
 
+// Ensure the table exists. Cheap no-op after the first run since
+// CREATE TABLE IF NOT EXISTS is idempotent.
+async function ensureTable() {
+    await sql`
+        CREATE TABLE IF NOT EXISTS games (
+            game_id TEXT PRIMARY KEY,
+            state JSONB NOT NULL
+        )
+    `;
+}
+
+async function getGame(gameId) {
+    const rows = await sql`
+        SELECT state FROM games WHERE game_id = ${gameId}
+    `;
+    return rows.length ? rows[0].state : null;
+}
+
+async function saveGame(gameId, game) {
+    await sql`
+        INSERT INTO games (game_id, state)
+        VALUES (${gameId}, ${JSON.stringify(game)}::jsonb)
+        ON CONFLICT (game_id)
+        DO UPDATE SET state = EXCLUDED.state
+    `;
+}
+
 export default async function handler(req, res) {
     const gameId = req.headers["x-game-id"];
 
@@ -44,9 +73,9 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: "Invalid game ID" });
     }
 
-    const key = `game:${gameId}`;
+    await ensureTable();
 
-    let game = await kv.get(key);
+    let game = await getGame(gameId);
 
     if (!game) {
         game = newGame();
@@ -61,7 +90,7 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "GET") {
-        await kv.set(key, game);
+        await saveGame(gameId, game);
         return res.json(publicGame(game));
     }
 
@@ -106,7 +135,7 @@ export default async function handler(req, res) {
 
     game.lastUpdate = Date.now();
 
-    await kv.set(key, game);
+    await saveGame(gameId, game);
 
     return res.json(publicGame(game));
 }
