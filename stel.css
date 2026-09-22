@@ -136,9 +136,23 @@ button:active {
 
 .toast {
     position: absolute;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #10b981;
     pointer-events: none;
-    color: white;
+    transform: translate(-50%, -50%);
+    animation: floatUpFade 0.8s ease-out forwards;
+}
+
+@keyframes floatUpFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(-50px); 
+    }
 }
 
 @media (max-width: 600px) {
