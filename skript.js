@@ -2,7 +2,7 @@ const moneyUI = document.getElementById("money-ui");
 const moneyPerClickUI = document.getElementById("money-per-click-ui");
 const moneyPerSecondUI = document.getElementById("money-per-second-ui");
 const upgradesContainer = document.getElementById("upgrades-container");
-const moneyImg = document.getElementById("money-img"); 
+const moneyImg = document.getElementById("money-img");
 
 let money = 0;
 let moneyPerClick = 1;
