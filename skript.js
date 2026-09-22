@@ -5,23 +5,61 @@ const upgradesContainer = document.getElementById("upgrades-container");
 const moneyImg = document.getElementById("money-img");
 
 const upgrades = [
-    // format: [name, description, cost, per click, per second, unlocked]
-    ["Better Money", "+$1 per click", 10, 1, 0, false],
-    ["Money Printer", "+$5 per second", 50, 0, 1, false], 
-    ["Golden Clicker", "+$50 per click", 200, 50, 0, false]
+    ["Better Money", "+$1 per click", 10, 1, 0],
+    ["Money Printer", "+$5 per second", 50, 0, 1],
+    ["Golden Clicker", "+$50 per click", 200, 50, 0]
 ];
 
-let toasts = [];
-let money = 0;
-let moneyPerClick = 1;
-let moneyPerSecond = 0;
+let gameId = localStorage.getItem("gameId");
 
-function update(amount = 0) {
-    money += amount;
+if (!gameId) {
+    gameId = crypto.randomUUID();
+    localStorage.setItem("gameId", gameId);
+}
 
-    moneyUI.textContent = `$${money}`;
-    moneyPerClickUI.textContent = `$${moneyPerClick} per click`;
-    moneyPerSecondUI.textContent = `$${moneyPerSecond} per second`;
+let game = {
+    money: 0,
+    moneyPerClick: 1,
+    moneyPerSecond: 0,
+    bought: []
+};
+
+async function request(action, upgrade = null) {
+    const response = await fetch("/api/game", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Game-ID": gameId
+        },
+        body: JSON.stringify({ action, upgrade })
+    });
+
+    if (!response.ok) {
+        console.error(await response.json());
+        return;
+    }
+
+    game = await response.json();
+    updateUI();
+}
+
+async function loadGame() {
+    const response = await fetch("/api/game", {
+        headers: {
+            "X-Game-ID": gameId
+        }
+    });
+
+    game = await response.json();
+    updateUI();
+}
+
+function updateUI() {
+    moneyUI.textContent = `$${Math.floor(game.money)}`;
+    moneyPerClickUI.textContent =
+        `$${game.moneyPerClick} per click`;
+    moneyPerSecondUI.textContent =
+        `$${game.moneyPerSecond} per second`;
 
     updateUpgrades();
 }
@@ -30,13 +68,10 @@ function updateUpgrades() {
     upgradesContainer.innerHTML = "";
 
     upgrades.forEach((upgrade, index) => {
-        const [name, description, cost, click, second, unlocked] = upgrade;
+        const [name, description, cost] = upgrade;
 
-        if (!unlocked && money >= cost) {
-            upgrade[5] = true;
-        }
-
-        if (!upgrade[5]) return;
+        if (game.bought[index]) return;
+        if (game.money < cost) return;
 
         const div = document.createElement("div");
         div.className = "upgrade";
@@ -47,49 +82,33 @@ function updateUpgrades() {
                 <span>${description}</span>
                 <small>Cost: $${cost}</small>
             </div>
-            <button ${money < cost ? "disabled" : ""}>Buy</button>
+            <button>Buy</button>
         `;
 
-        div.querySelector("button").addEventListener("click", () => {
-            if (money < cost) return;
-
-            money -= cost;
-            moneyPerClick += click;
-            moneyPerSecond += second;
-
-            update();
-        });
+        div.querySelector("button").onclick = () => {
+            request("buy", index);
+        };
 
         upgradesContainer.appendChild(div);
     });
 }
 
-moneyImg.addEventListener("click", (e) => {
-    update(moneyPerClick);
-    const x = e.pageX;
-    const y = e.pageY;
+moneyImg.addEventListener("click", e => {
+    request("click");
+
     const p = document.createElement("p");
-    p.style.left = `${x}px`;
-    p.style.top = `${y}px`;
+
+    p.style.left = `${e.pageX}px`;
+    p.style.top = `${e.pageY}px`;
+
     p.classList.add("toast");
-    p.textContent = `+${moneyPerClick}`;
+    p.textContent = `+${game.moneyPerClick}`;
+
     document.body.appendChild(p);
-    setTimeout(() => {
-        p.remove();
-    }, 800);
+
+    setTimeout(() => p.remove(), 800);
 });
 
-setInterval(() => {
-    update(moneyPerSecond);
-}, 1000);
+setInterval(loadGame, 1000);
 
-setInterval(() => {
-    if (Math.random() < 0.2) {
-        alert("sorry");
-        money = 0;
-    } else {
-        alert("lucky");
-    }
-}, 10000);
-
-update();
+loadGame();
