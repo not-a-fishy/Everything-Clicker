@@ -8,6 +8,9 @@ const upgrades = [
     // stuff here :)
     // format
     // ['name', 'description', 'cost', 'amount per click', 'amount per second', 'unlocked (boolean)']
+    ["Better Money", "+1 money per click", 10, 1, 0, false],
+    ["Money Printer", "+1 money per second", 50, 0, 1, false],
+    ["Golden Clicker", "+5 money per click", 200, 5, 0, false]
 ]
 
 let money = 0;
