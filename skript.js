@@ -1,4 +1,5 @@
-// default function to make sure stuff works
-function f(){
-    alert("1")
+const a = 0;
+const i = 1;
+function add() {
+    a += i;
 }
