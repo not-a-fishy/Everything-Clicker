@@ -29,7 +29,30 @@ function updateUpgrades() {
     upgrades.forEach((upgrade) => {
         if (upgrade.unlocked) {
             const div = document.createElement("div");
-            // finish this
+            div.className = "upgrade";
+    
+            div.innerHTML = `
+                <div class="upgrade-info">
+                    <strong>${name}</strong>
+                    <span>${description}</span>
+                    <small>Cost: $${cost}</small>
+                </div>
+                <button ${money < cost ? "disabled" : ""}>Buy</button>
+            `;
+    
+            div.querySelector("button").addEventListener("click", () => {
+                if (money < cost) return;
+    
+                money -= cost;
+                moneyPerClick += click;
+                moneyPerSecond += second;
+    
+                upgrades[index][5] = false;
+    
+                update();
+            });
+    
+            upgradesContainer.appendChild(div);
         }
     });
 }
