@@ -5,13 +5,11 @@ const upgradesContainer = document.getElementById("upgrades-container");
 const moneyImg = document.getElementById("money-img");
 
 const upgrades = [
-    // stuff here :)
-    // format
-    // ['name', 'description', 'cost', 'amount per click', 'amount per second', 'unlocked (boolean)']
+    // format: [name, description, cost, per click, per second, unlocked]
     ["Better Money", "+1 money per click", 10, 1, 0, false],
     ["Money Printer", "+1 money per second", 50, 0, 1, false],
     ["Golden Clicker", "+5 money per click", 200, 5, 0, false]
-]
+];
 
 let money = 0;
 let moneyPerClick = 1;
@@ -19,48 +17,55 @@ let moneyPerSecond = 0;
 
 function update(amount = 0) {
     money += amount;
+
     moneyUI.textContent = `$${money}`;
     moneyPerClickUI.textContent = `$${moneyPerClick} per click`;
     moneyPerSecondUI.textContent = `$${moneyPerSecond} per second`;
+
+    updateUpgrades();
 }
 
 function updateUpgrades() {
-    upgrades.forEach((upgrade) => {
-        if (!upgrade.unlocked && money > upgrade.cost) upgrade.unlocked = true;
-    });
+    upgradesContainer.innerHTML = "";
 
-    upgrades.forEach((upgrade) => {
-        if (upgrade.unlocked) {
-            const div = document.createElement("div");
-            div.className = "upgrade";
-    
-            div.innerHTML = `
-                <div class="upgrade-info">
-                    <strong>${name}</strong>
-                    <span>${description}</span>
-                    <small>Cost: $${cost}</small>
-                </div>
-                <button ${money < cost ? "disabled" : ""}>Buy</button>
-            `;
-    
-            div.querySelector("button").addEventListener("click", () => {
-                if (money < cost) return;
-    
-                money -= cost;
-                moneyPerClick += click;
-                moneyPerSecond += second;
-    
-                upgrades[index][5] = false;
-    
-                update();
-            });
-    
-            upgradesContainer.appendChild(div);
+    upgrades.forEach((upgrade, index) => {
+        const [name, description, cost, click, second, unlocked] = upgrade;
+
+        if (!unlocked && money >= cost) {
+            upgrade[5] = true;
         }
+
+        if (!upgrade[5]) return;
+
+        const div = document.createElement("div");
+        div.className = "upgrade";
+
+        div.innerHTML = `
+            <div class="upgrade-info">
+                <strong>${name}</strong>
+                <span>${description}</span>
+                <small>Cost: $${cost}</small>
+            </div>
+            <button ${money < cost ? "disabled" : ""}>Buy</button>
+        `;
+
+        div.querySelector("button").addEventListener("click", () => {
+            if (money < cost) return;
+
+            money -= cost;
+            moneyPerClick += click;
+            moneyPerSecond += second;
+
+            upgrade[5] = false;
+
+            update();
+        });
+
+        upgradesContainer.appendChild(div);
     });
 }
 
-moneyImg.addEventListener('click', () => {
+moneyImg.addEventListener("click", () => {
     update(moneyPerClick);
 });
 
