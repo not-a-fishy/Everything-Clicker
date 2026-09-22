@@ -5,10 +5,10 @@ const upgradesContainer = document.getElementById("upgrades-container");
 const moneyImg = document.getElementById("money-img");
 
 const upgrades = [
-    // format: [name, description, cost, per click, per second, unlocked]
-    ["Better Money", "+$1 per click", 10, 1, 0, false],
-    ["Money Printer", "+$5 per second", 50, 0, 1, false], 
-    ["Golden Clicker", "+$50 per click", 200, 50, 0, false]
+    // format: [name, description, cost, per click, per second, multiplier, unlocked]
+    ["Better Money", "+$1 per click", 10, 1, 0, 1.5, false],
+    ["Money Printer", "+$5 per second", 50, 0, 1, 1.5, false], 
+    ["Golden Clicker", "+$50 per click", 500, 50, 0, 2, false]
 ];
 
 let toasts = [];
@@ -30,7 +30,7 @@ function updateUpgrades() {
     upgradesContainer.innerHTML = "";
 
     upgrades.forEach((upgrade, index) => {
-        const [name, description, cost, click, second, unlocked] = upgrade;
+        const [name, description, cost, click, second, multiplier, unlocked] = upgrade;
 
         if (!unlocked && money >= cost) {
             upgrade[5] = true;
@@ -56,7 +56,8 @@ function updateUpgrades() {
             money -= cost;
             moneyPerClick += click;
             moneyPerSecond += second;
-
+            cost *= multiplier
+            
             update();
         });
 
