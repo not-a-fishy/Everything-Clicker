@@ -19,7 +19,7 @@ function update() {
     updateUI();
 }
 
-moneyImg.addEventListener(('click') => {
+moneyImg.addEventListener('click', () => {
     money += moneyPerClick;
 });
 
