@@ -4,7 +4,7 @@ const moneyPerSecondUI = document.getElementById("money-per-second-ui");
 const upgradesContainer = document.getElementById("upgrades-container");
 const moneyImg = document.getElementById("money-img");
 
-const upgrades = [
+let upgrades = [
     // format: [name, description, cost, per click, per second, multiplier, unlocked]
     ["Better Money", "+$1 per click", 10, 1, 0, 1.5, false],
     ["Money Printer", "+$5 per second", 50, 0, 1, 1.5, false], 
