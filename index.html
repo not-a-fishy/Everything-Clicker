@@ -4,72 +4,7 @@
         <link rel="stylesheet" href="stel.css">
     </head>
     <body>
-        <svg xmlns="http://w3.org" viewBox="0 0 800 420" width="100%" height="100%">
-          <defs>
-            <!-- Soft light purple gradient background reminiscent of the S$100 note -->
-            <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#E8EAF6" />
-              <stop offset="40%" stop-color="#C5CAE9" />
-              <stop offset="100%" stop-color="#9FA8DA" />
-            </linearGradient>
-            
-            <!-- Dynamic gold foil gradient for security emblem -->
-            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#FFE082" />
-              <stop offset="50%" stop-color="#FFB300" />
-              <stop offset="100%" stop-color="#FFA000" />
-            </linearGradient>
-            
-            <!-- Security thread gradient -->
-            <linearGradient id="securityThread" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#7986CB" />
-              <stop offset="50%" stop-color="#303F9F" />
-              <stop offset="100%" stop-color="#7986CB" />
-            </linearGradient>
-          </defs>
-        
-          <!-- Note Base -->
-          <rect width="800" height="420" rx="20" fill="url(#bgGrad)" stroke="#5C6BC0" stroke-width="4" />
-          
-          <!-- Subtle Background Micro-Patterns (Guilloche lines substitute) -->
-          <circle cx="200" cy="210" r="160" fill="none" stroke="#B0BEC5" stroke-width="1" stroke-dasharray="4 8" opacity="0.5"/>
-          <circle cx="200" cy="210" r="130" fill="none" stroke="#B0BEC5" stroke-width="1" opacity="0.3"/>
-          <rect x="40" y="40" width="720" height="340" fill="none" stroke="#3F51B5" stroke-width="1" stroke-dasharray="20 10" opacity="0.15" />
-        
-          <!-- Holographic / Gold Security Foil (Right Side) -->
-          <polygon points="680,60 730,120 730,300 680,360 630,300 630,120" fill="url(#goldGrad)" opacity="0.85" />
-          <circle cx="680" cy="210" r="30" fill="#FFF8E1" opacity="0.7" />
-          <text x="680" y="218" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FF8F00" text-anchor="middle">100</text>
-        
-          <!-- Vertical Security Thread (Left-Center) -->
-          <rect x="280" y="0" width="16" height="420" fill="url(#securityThread)" opacity="0.8" />
-          
-          <!-- "SINGAPORE" Text in 4 Official Languages -->
-          <text x="50" y="65" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#1A237E" letter-spacing="2">SINGAPURA</text>
-          <text x="50" y="100" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#1A237E" letter-spacing="2">SINGAPORE</text>
-          <text x="50" y="135" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1A237E">新加坡</text>
-          <text x="50" y="170" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#1A237E">சிங்கப்பூர்</text>
-        
-          <!-- Portrait Placeholder Frame (Left Side) -->
-          <rect x="50" y="210" width="140" height="170" rx="15" fill="#E8EAF6" stroke="#7986CB" stroke-width="2" opacity="0.7" />
-          <path d="M80,380 C80,310 160,310 160,380" fill="#9FA8DA" />
-          <circle cx="120" cy="280" r="35" fill="#9FA8DA" />
-        
-          <!-- Prominent "100" Denomination Numerals -->
-          <text x="750" y="380" font-family="'Impact', 'Arial Black', sans-serif" font-size="95" font-weight="bold" fill="#283593" text-anchor="end">100</text>
-          <text x="320" y="380" font-family="'Impact', 'Arial Black', sans-serif" font-size="55" font-weight="bold" fill="#3F51B5" opacity="0.4">100</text>
-        
-          <!-- Currency Text Indicator -->
-          <text x="750" y="295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#303F9F" text-anchor="end">SPECIMEN</text>
-          <text x="320" y="85" font-family="Helvetica, sans-serif" font-size="24" font-weight="bold" fill="#283593">SINGAPORE DOLLAR</text>
-          
-          <!-- Braille Code / Tactile Feature for Visually Impaired (Top Right) -->
-          <circle cx="740" cy="40" r="5" fill="#1A237E" />
-          <circle cx="740" cy="55" r="5" fill="#1A237E" />
-          <circle cx="755" cy="40" r="5" fill="#1A237E" />
-          <circle cx="755" cy="55" r="5" fill="#1A237E" />
-        </svg>
-
+        <img src="money.png">
         <div id="upgrade-container" class="container"></div>
     </body>
 </html>
