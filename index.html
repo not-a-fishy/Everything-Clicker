@@ -1,28 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Everything clicker</title>
-		<link rel="stylesheet" href="stel.css">
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>Everything Clicker</title>
+	    <link rel="preconnect" href="https://fonts.googleapis.com">
+	    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+	    <link rel="stylesheet" href="style.css">
 	</head>
-	<body>
-		<div id="screen-glow"></div>
-		<div class = "game-container">
-			<div id="rebirth"></div>
-			<div id = "layer1Left">
-				<h1>The Everything Clicker</h1>
-				<h2 id="count">$0</h2>
-				<button id="click-btn" type="button" aria-label="We getting rich with this one"><img src="money.png" alt=""></button>
-				<h3>Clicking generates $<b id="click-str">1</b>.</h3>
-				<h3>Automatically generates $<b id = "auto-str">0</b> every second.</h3>
-			</div>
-			<div id = "layer1Right">
-				<h2>Upgrades</h2>
-				<div id="upgrade-area"></div>
-			</div>
-		</div>
-		<p style="color: rgb(128, 128, 128); top: 0; left: 0;">Version 0.1.5</p>
-		<script src="skript.js"></script>
+	<body data-stage="money">
+	
+	    <section class="stage" id="stage-money">
+	        <div id="screen-glow"></div>
+	        <div id="buff-area"></div>
+	        <div class="game-container">
+	            <div id="rebirth"></div>
+	            <div id="layer1Left">
+	                <h1>The Everything Clicker</h1>
+	                <h2 id="count">$0</h2>
+	                <button id="click-btn" type="button" aria-label="We getting rich with this one"><img src="money.png" alt=""></button>
+	                <h3>Clicking generates $<b id="click-str">1</b>.</h3>
+	                <h3>Automatically generates $<b id="auto-str">0</b> every second.</h3>
+	            </div>
+	            <div id="layer1Right">
+	                <h2>Upgrades</h2>
+	                <div id="upgrade-area"></div>
+	            </div>
+	        </div>
+	        <canvas id="crypto-rain" aria-hidden="true"></canvas>
+	        <p id="version">Version 0.1.5</p>
+	    </section>
+	
+	    <section class="stage" id="stage-bash">
+	        <div id="bash">
+	            <div id="container">
+	                <div id="output">
+	                    <p>Welcome to FakeBash 1.0</p>
+	                </div>
+	                <div class="line">
+	                    <span class="prompt">user@fakebash:~$</span>
+	                    <input id="cmd" type="text" autocomplete="off" spellcheck="false">
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	
+	    <section class="stage" id="stage-crypto">
+	        <canvas id="matrix" aria-hidden="true"></canvas>
+	        <main class="app-container">
+	            <section class="panel actual-stuff" aria-label="Mining">
+	                <p class="balance-label">Crypto mined</p>
+	                <p class="balance"><span id="balance">0</span> <span class="unit">₿</span></p>
+	                <p class="rate"><span id="rate">0</span> per second</p>
+	                <button id="clicker" aria-label="Mine one coin"><img src="bitcoin.png" alt=""></button>
+	                <p class="hint"><span id="per-click">1</span> per click</p>
+	            </section>
+	            <section class="panel" id="upgrades" aria-label="Upgrades">
+	                <h2>Upgrades</h2>
+	                <ul id="upgrade-list"></ul>
+	                <p class="empty" id="upgrade-empty">No upgrades yet.</p>
+	            </section>
+	        </main>
+	    </section>
+	
+	    <script src="script.js"></script>
 	</body>
 </html>
