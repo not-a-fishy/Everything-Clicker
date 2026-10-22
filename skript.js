@@ -5,6 +5,7 @@ const autoText = document.getElementById("auto-str");
 const upgradesContainer = document.getElementById("upgrade-area");
 const rebirth_area = document.getElementById("rebirth");
 let rebirth_btn = null;
+let cheated = false;
 const glowContainer = document.getElementById('screen-glow');
 let flag = false;
 const BOOST_MULTIPLIER = 7;
