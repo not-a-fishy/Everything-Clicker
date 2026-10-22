@@ -6,7 +6,7 @@ const upgradesContainer = document.getElementById("upgrade-area");
 const rebirth_area = document.getElementById("rebirth");
 let rebirth_btn = null;
 const glowContainer = document.getElementById('screen-glow');
-
+let flag = false;
 const BOOST_MULTIPLIER = 7;
 const BOOST_DURATION = 60;
 const SPAWN_MIN = 300;
@@ -500,13 +500,14 @@ function rebirth_render() {
 		void rebirth_btn.offsetWidth;
 	}
 
-	const canRebirth = count >= 1e10;
+	const canRebirth = count >= 1e19;
 	rebirth_btn.classList.toggle("visible", canRebirth);
 	rebirth_btn.disabled = !canRebirth;
 }
 
 function rebirth_logic(event) {
-	if (count >= 1e10) {
+	if (count >= 1e19) {
+		
 		window.location.href = "i.html";
 	}
 }
@@ -515,8 +516,8 @@ function cheat() {
 	for (const item of data) {
 		item.purchased = item.buycap;
 	}
-	count = 1e100;
-
+	count = 0;
+	alert("bad cheater bad")
 	saveProgress();
 	recalcStats();
 	render();
