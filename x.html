@@ -15,23 +15,20 @@
 
   <main class="app-container">
     <section class="panel actual-stuff" aria-label="Mining">
-      <p class="balance-label">Crypto mined</p>
-      <p class="balance"><span id="balance">0</span> <span class="unit">₿</span></p>
-      <p class="rate"><span id="rate">0</span> per second</p>
+	<h3 id="txt1">Crypto Mined: 0</h3>
 
-      <button id="clicker" aria-label="Mine one coin">
-        <img src="bitcoin.png">
-      </button>
-      <p class="hint"><span id="per-click">1</span> per click</p>
+      <button id="clicker"><img src="bitcoin.png"></button>
+	
+      	<h3 id="txt2">Click Increase: 1</h3>
+	<h3 id="txt3">Auto Crypto Mines: 0/s</h3>
     </section>
 
     <section class="panel" id="upgrades" aria-label="Upgrades">
       <h2>Upgrades</h2>
-      <ul id="upgrade-list"></ul>
-      <p class="empty" id="upgrade-empty">No upgrades yet.</p>
     </section>
   </main>
 
+  <script src="styles.js"></script>
   <script src="sgribt.js"></script>
 </body>
 </html>
