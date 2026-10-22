@@ -574,7 +574,6 @@ async function runGame() {
 	data = loaded;
 
 	count = loadCount();
-	count = 1e19
 	rebirthed = localStorage.getItem('rebirthed') === "1";
 
 	const purchased = loadPurchased();
