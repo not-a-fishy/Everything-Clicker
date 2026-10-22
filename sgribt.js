@@ -21,7 +21,6 @@ function initializeDrops() {
 }
 
 function clearScreen() {
-  // Reset the glow so the fade rectangle doesn't flash the whole screen
   ctx.shadowBlur = 0;
   ctx.shadowColor = 'transparent';
   ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -69,4 +68,4 @@ function initApplication() {
   setInterval(draw, 33);
 }
 
-initApplication();
+initApplication()
