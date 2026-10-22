@@ -3,20 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Everything clicker</title>
+  <title>Everything Clicker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stelz.css">
 </head>
 <body>
 
-  <canvas id="matrix"></canvas>
+  <canvas id="matrix" aria-hidden="true"></canvas>
 
   <main class="app-container">
-    <div class="actual-stuff">
-      <h1>test</h1>
-    </div>
+    <section class="panel actual-stuff" aria-label="Mining">
+      <p class="balance-label">Crypto mined</p>
+      <p class="balance"><span id="balance">0</span> <span class="unit">₿</span></p>
+      <p class="rate"><span id="rate">0</span> per second</p>
+
+      <button id="clicker" aria-label="Mine one coin">
+        <img src="bitcoin.png">
+      </button>
+      <p class="hint"><span id="per-click">1</span> per click</p>
+    </section>
+
+    <section class="panel" id="upgrades" aria-label="Upgrades">
+      <h2>Upgrades</h2>
+      <ul id="upgrade-list"></ul>
+      <p class="empty" id="upgrade-empty">No upgrades yet.</p>
+    </section>
   </main>
 
   <script src="sgribt.js"></script>
 </body>
 </html>
-
