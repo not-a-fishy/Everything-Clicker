@@ -1,0 +1,16 @@
+[
+  {
+    "upgrade": "Definitely Legal Machines to buy bitcoin",
+    "cost": 10,
+    "description":"Free Robux for them, Free bitcoin for us. Win-Win!",
+    "PerSec": 0,
+    "PerClick": 1
+  }, 
+  {
+    "upgrade": "Big Company Servers",
+    "cost": 100,
+    "description": "High Risk, High reward. They are running 24/7, so we can use them to do automatic mining!",
+    "PerSec": 5,
+    "PerClick": 0
+  }
+]
