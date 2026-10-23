@@ -1,49 +1,66 @@
-# everything clicker
+# Everything Clicker
 
-stuff to add: point system, research pet system, kayden
+Stuff to add: point system, research pet system, kayden
 
 ONLY USE AI FOR CSS
 
-- Update pre-pre-pre alpha 0.0.1: added base features(just the button lmao)
+- v0.1.0
+  - Implemented the core interactive element (primary button).
+    
+- v0.2.0
+  - Added a counter system.
+  - Applied initial UI styling.
 
-- Update pre-pre-pre alpha 0.0.2: Count and actual styling added
+- v0.3.0
+  - Introduced upgrade data stored in a JSON file.
+  - Implemented loading of upgrade data from the JSON file.
 
-- Update pre-pre-pre alpha 0.0.3: added upgrade data in json file and loading said json file
+- v0.3.1
+  - Refined the upgrade panel’s CSS for improved visual presentation.
 
-- Update pre-pre-pre alpha 0.0.4:Updated CSS of upgrade area to look better
+- v0.4.0
+  - Implemented dynamic generation of upgrade buttons.
+  - Added initial upgrade functionality.
 
-- Update pre-pre-pre alpha 0.0.5: added upgrade button making HOPEFULLY and upgrades.
+- v0.4.1
+  - Fixed issues with the upgrade system.
 
-- Update pre-pre-pre alpha 0.0.6: Added patch for upgrades
+- v0.5.0
+  - Added an additional upgrade.
 
-- Update pre-pre-pre alpha 0.0.7: Added another upgrade
+- v0.6.0
+  -Introduced a purchase limit for upgrades.
 
-- Update pre-pre-pre alpha 0.0.8: Added a buy limit
+- v0.7.0 (Major Update)
+  - Implemented storage caching.
+  - Optimized the codebase for improved game performance.
 
-- Update pre-pre-pre alpha 0.0.9: Major update, implemented storage caching and optimised code, hopefully game should be faster
+- v0.8.0
+  - Expanded the upgrade pool with new upgrades.
 
-- Update pre-pre-pre alpha 0.1.0: Added more upgrades yay
+- v0.9.0
+  - Added further upgrades to the pool.
 
-- Update pre-pre-pre alpha 0.1.1: Added even more upgrades(current version)
+- v0.9.1
+  - Fixed styling issues so all text is clearly visible.
+  -Added the currency symbol ($) to the display.
 
-- Update pre-pre-pre alpha 0.1.2: made some styling changes so that all text is visible. Also added dollar sign.
+- v0.10.0
+  - Added dynamically spawning parallelograms.
+  - Expanded the upgrade pool with additional upgrades.
+  - Implemented scaling costs for upgrades.
 
-- Update pre-pre alpha 0.1.5: added parallelograms that spawn, added more upgrades and made upgrades scale.
+- v0.11.0
+  - Added a number abbreviation system (e.g., “thousand”) for compact large-number display.
 
-- Update pre-pre alpha 0.1.6: added 'thousand' system that makes numbers shorter.
+- v0.12.0
+  - Added the rebirth system framework (functionality not yet implemented).
 
-- Update pre-pre alpha 0.1.7: added rebirth system that does not actually rebirth yet.
+- v0.13.0
+  - Created the preliminary layout for Minigame 1.
 
-- Update pre-pre alpha 0.1.8: added rough layout of minigame 1
-
-- **Update pre-pre alpha 0.1.9: added minigame 1.**
-
-
-
-
-Major update soon I swear
-
-Most recent update was bug fixing cus I'm a bad programmer and I fked something up
+- v0.14.0 (Current)
+  - Released Minigame 1.
 
 Our version control is fked up so don't expect consistent version numbers
 
