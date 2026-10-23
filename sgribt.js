@@ -2,6 +2,7 @@ let count = 0;
 let autoadd = 0;
 let click = 1;
 const button = document.querySelector("#clicker");
+let data = []
 
 const txt1 = document.getElementById("txt1");
 const txt2 = document.getElementById("txt2");
@@ -18,11 +19,19 @@ function increase() {
 	render();
 }
 
-function load_upgrades() {
-	return;
+async function loadUpgrades() {
+  try {
+    const response = await fetch('./w2upgrades.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Could not load JSON file:", error);
+  }
 }
-
-function upgrade_logic() {
+function upgrade_logic(i) {
 	return;
 }
 
