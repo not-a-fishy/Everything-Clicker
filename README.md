@@ -62,10 +62,6 @@ ONLY USE AI FOR CSS
 - v0.14.0 (Current)
   - Released Minigame 1.
 
-Major update soon I swear
-
-Most recent update was bug fixing cus I'm a bad programmer and I fked something up
-
 Our version control is fked up so don't expect consistent version numbers
 
 **NOTE TO CONTRIBUTORS: CREATE YOUR OWN BRANCHES AND SEND PULL REQUESTS PLS**
