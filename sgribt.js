@@ -37,6 +37,8 @@ function upgrade_logic(i) {
 
 button.addEventListener("click", increase);
 
+loadUpgrades();
+
 setInterval(() => {
 	if (autoadd > 0) {
 		count += autoadd;
