@@ -4,8 +4,8 @@ Stuff to add: point system, research pet system, kayden
 
 ONLY USE AI FOR CSS
 
-v0.1.0
-Implemented the core interactive element (primary button).
+- v0.1.0
+  - Implemented the core interactive element (primary button).
 v0.2.0
 Added a counter system.
 Applied initial UI styling.
