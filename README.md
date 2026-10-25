@@ -43,7 +43,7 @@ ONLY USE AI FOR CSS
 
 - v0.9.1
   - Fixed styling issues so all text is clearly visible.
-  -Added the currency symbol ($) to the display.
+  - Added the currency symbol ($) to the display.
 
 - v0.10.0
   - Added dynamically spawning parallelograms.
