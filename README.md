@@ -29,7 +29,7 @@ ONLY USE AI FOR CSS
   - Added an additional upgrade.
 
 - v0.6.0
-  -Introduced a purchase limit for upgrades.
+  - Introduced a purchase limit for upgrades.
 
 - v0.7.0 (Major Update)
   - Implemented storage caching.
