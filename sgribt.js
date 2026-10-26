@@ -7,6 +7,7 @@ let data = []
 const txt1 = document.getElementById("txt1");
 const txt2 = document.getElementById("txt2");
 const txt3 = document.getElementById("txt3");
+const upgdiv = document.getElementById("upgBtns");
 
 function render() {
 	txt1.textContent = "Crypto Mined: " + Math.floor(count);
@@ -27,6 +28,11 @@ async function loadUpgrades() {
     }
     data = await response.json();
     console.log(data);
+	for (let i = 0; i<data.length; i++){
+		const button = document.createElement("button");
+		button.textContent = data[i]["upgrade"] + " " + data[i]["cost"]
+		button.onClick = () => upgrade_logic(i);
+	}
   } catch (error) {
     console.error("Could not load JSON file:", error);
   }
