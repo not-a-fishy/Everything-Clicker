@@ -21,7 +21,7 @@ function increase() {
 
 async function loadUpgrades() {
   try {
-    const response = await fetch('./w2upgrades.json');
+    const response = await fetch('./upgradesW2.json');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
