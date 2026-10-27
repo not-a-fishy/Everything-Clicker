@@ -32,6 +32,7 @@ async function loadUpgrades() {
 		const button = document.createElement("button");
 		button.textContent = data[i]["upgrade"] + " " + data[i]["cost"]
 		button.onClick = () => upgrade_logic(i);
+		upgdiv.appendChild(button);
 	}
   } catch (error) {
     console.error("Could not load JSON file:", error);
