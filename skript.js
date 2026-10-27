@@ -15,7 +15,7 @@ const SPAWN_MAX = 900;
 const PARALLELOGRAM_SIZE = 80;
 const PARALLELOGRAM_LIFETIME = 8000;
 const RAIN_FONT_SIZE = 16;
-const REBIRTH_COST = 1e18;
+const REBIRTH_COST = 1e15;
 const CRYPTO_UPGRADE_NAME = "Crypto Mining Software";
 const PARALLELOGRAM_UPGRADE_NAME = "I am a Parallelogram";
 
