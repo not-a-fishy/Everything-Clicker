@@ -59,9 +59,14 @@ ONLY USE AI FOR CSS
 - v0.13.0
   - Created the preliminary layout for Minigame 1.
 
-- v0.14.0 (Current)
+- v0.14.0
   - Released Minigame 1.
 
+- v0.15.0
+  - Added W2 and basic clicking
+  
+- v0.16.0 (current)
+  - Added Upgrade buttons for W2.
 Our version control is fked up so don't expect consistent version numbers
 
 **NOTE TO CONTRIBUTORS: CREATE YOUR OWN BRANCHES AND SEND PULL REQUESTS PLS**
