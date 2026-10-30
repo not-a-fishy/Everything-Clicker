@@ -30,7 +30,13 @@ async function loadUpgrades() {
     console.log(data);
 	for (let i = 0; i<data.length; i++){
 		const button = document.createElement("button");
-		button.textContent = data[i]["upgrade"] + " " + data[i]["cost"]
+		button.className = "upgrade";
+		button.innerHTML = `
+		  <span class="name">${data[i].upgrade}</span>
+		  <span class="owned">0</span>
+		  <span class="desc">${data[i].description}</span>
+		  <span class="cost">${data[i].cost}</span>
+		`;
 		button.onclick = () => upgrade_logic(i);
 		upgdiv.appendChild(button);
 	}
